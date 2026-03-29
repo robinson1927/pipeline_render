@@ -1,0 +1,4 @@
+pipeline-algoritmo.json
+__pycache__/
+*.pyc
+.env
