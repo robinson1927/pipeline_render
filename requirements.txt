@@ -3,3 +3,4 @@ psycopg2-binary
 pandas
 gspread
 oauth2client
+python-dotenv

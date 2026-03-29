@@ -1,13 +1,12 @@
 from os import environ
-
 import psycopg2
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
-#from oauth2client.service_account import ServiceAccountCredentials
+from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
-from dotenv import load_dotenv
-load_dotenv()
+#from dotenv import load_dotenv
+#load_dotenv()
 import os
 import json
 
@@ -46,11 +45,11 @@ def ejecutar_pipeline():
             "https://www.googleapis.com/auth/drive"
         ]
 
-        creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
-        #creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+        #creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
         client = gspread.authorize(creds)
 
-        # 🔹 5. Subir a Google Sheets
+        # 5. Subir a Google Sheets
         sheet = client.open("datos_algoritmos").sheet1
 
 
