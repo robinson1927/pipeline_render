@@ -31,11 +31,18 @@ def ejecutar_pipeline():
         conn.close()
 
         # 3. Transformación
-        df["time"] = df["time"].astype(str)
-        df["time"] = pd.to_timedelta(df["time"])
-        df["time_ms"] = df["time"].dt.total_seconds() * 1000
-        df["time_ms"] = df["time_ms"] / 1000
-        df = df.drop(columns=["time"])
+        #df["time"] = df["time"].astype(str)
+        #df["time"] = pd.to_timedelta(df["time"])
+        #df["time_ms"] = df["time"].dt.total_seconds() * 1000
+        #df["time_ms"] = df["time_ms"] / 1000
+        #df = df.drop(columns=["time"])
+
+        # Tiempo en segundos (base para gráficos)
+        df["time_seconds"] = df["time"]
+        # Convertir a timedelta para formato bonito
+        df["time_format"] = pd.to_timedelta(df["time_seconds"], unit="s")
+        # Convertir a string (min:seg:ms)
+        df["time_format"] = df["time_format"].astype(str)
 
         # 4. Credenciales desde ENV (CORRECTO)
         creds_dict = json.loads(os.environ["GOOGLE_CREDENTIALS"])
